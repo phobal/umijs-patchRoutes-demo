@@ -31,3 +31,8 @@ export function patchRoutes(routes: IRoute[]) {
 2、安装依赖 yarn install  
 3、执行 yarn start, 打开页面后，点击页面上的 `go to detail page`,能正常跳转
 4、执行 yarn build, 成功后进入 dist 目录，使用 http-serve 启动静态服务，打开网站，点击页面上的 `go to detail page` 不能正常跳转，会报 404
+
+#### ----- 更新 -----  
+不是 umi 的问题，是使用 http-serve 的问题， spa 应用需要设置类似 nginx 中的 try_file 属性，在启动 hs 的时候加上 `hs --port 8080 -P http://localhost:8080\?` 就可以将非
+index 路径路由代理到 index.html, 然后后 spa 应用自己去处理路由
+
